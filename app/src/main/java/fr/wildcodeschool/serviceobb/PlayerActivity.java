@@ -1,5 +1,6 @@
 package fr.wildcodeschool.serviceobb;
 
+import android.os.storage.OnObbStateChangeListener;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -21,6 +22,14 @@ public class PlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
+
+        OBBManager manager = new OBBManager(this, new OnObbStateChangeListener() {
+            @Override
+            public void onObbStateChange(String path, int state) {
+                super.onObbStateChange(path, state);
+            }
+        });
+        manager.mount();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
